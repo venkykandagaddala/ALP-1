@@ -1,0 +1,65 @@
+<div class="col-md-12 no-padding">
+  <div class="card">
+    <div class="card-header">
+      <h3>Login</h3>
+    </div>
+    <div class="card-body">
+      <form novalidate
+        #loginForm='ngForm'
+        (ngSubmit)='SubmitLoginForm(loginForm.value)'
+      >
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <span class="pull-right" *ngIf='emailField.touched && emailField.errors?.required'>
+            Please enter your email
+          </span>
+          <span class="pull-right" *ngIf='emailField.touched && emailField.errors?.email'>
+              Invalid email address
+            </span>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            required
+            email
+            placeholder="Enter email"
+            #emailField='ngModel'
+            [(ngModel)]="email"
+            [ngClass]="{'is-invalid': (emailField.touched || emailField.dirty) && !emailField.valid }" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <span class="pull-right"
+              *ngIf='PasswordField.touched && PasswordField.errors?.required'>
+              Please enter your password
+            </span>
+            <span class="pull-right"
+              *ngIf='PasswordField.touched && PasswordField.errors?.minlength'>
+              Password must be longer than 6 characters.
+            </span>
+            <input type="password"
+              [(ngModel)]="this.password"
+              required
+              minlength="6"
+              class="form-control"
+              name='password'
+              placeholder="Enter password"
+              #PasswordField='ngModel'
+              [ngClass]="{'is-invalid': (PasswordField.touched || PasswordField.dirty) && !PasswordField.valid }" />
+          </div>
+          <button
+          type="submit"
+          [disabled]='loginForm.invalid'
+          class="btn btn-primary">
+            Submit
+        </button>
+      </form>
+
+      <div>
+        {{emailField.touched}}
+        {{emailField.dirty}}
+        {{emailField.invalid}}
+      </div>
+    </div>
+  </div>
+</div>

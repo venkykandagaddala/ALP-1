@@ -1,0 +1,124 @@
+<div class="col-md-12 no-padding">
+  <div class="card">
+    <div class="card-header">
+      <h3>Sign Up!</h3>
+    </div>
+    <div class="card-body">
+      <form
+        #signupForm='ngForm'
+        (ngSubmit)='signupFormSubmit(signupForm)'
+        novalidate>
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <span class="pull-right"
+            *ngIf='userFirstName.touched && userFirstName.invalid'>
+              Please enter your first name
+          </span>
+          <input type="text"
+            required class="form-control"
+            name='firstName'
+            placeholder="Enter first name"
+            [(ngModel)]="user.firstName"
+            #userFirstName='ngModel'
+            [ngClass]="{'is-invalid': (userFirstName.touched || userFirstName.dirty) && !userFirstName.valid }"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">Last Name</label>
+          <span class="pull-right"
+            *ngIf='userlastName.touched && userlastName.invalid'>
+              Please enter your last name
+          </span>
+          <input type="text"
+            required class="form-control"
+            name='lastName'
+            placeholder="Enter last name"
+            [(ngModel)]="user.lastName"
+            #userlastName='ngModel'
+            [ngClass]="{'is-invalid': (userlastName.touched || userlastName.dirty) && !userlastName.valid }"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <span class="pull-right"
+            *ngIf='userEmailField.touched && userEmailField.errors?.required'>
+            Please enter your email
+          </span>
+          <span class="pull-right"
+            *ngIf='userEmailField.touched && userEmailField.errors?.email'>
+            Invalid email address
+          </span>
+          <input type="email"
+            [(ngModel)]="user.email"
+            required
+            email
+            class="form-control"
+            name='email'
+            placeholder="Enter email"
+            #userEmailField='ngModel'
+            [ngClass]="{'is-invalid': (userEmailField.touched || userEmailField.dirty) && !userEmailField.valid }"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <span class="pull-right"
+            *ngIf='userPasswordField.touched && userPasswordField.errors?.required'>
+            Please enter your password
+          </span>
+          <span class="pull-right"
+            *ngIf='userPasswordField.touched && userPasswordField.errors?.minlength'>
+            Password must be longer than 6 characters.
+          </span>
+          <input type="password"
+            [(ngModel)]="user.password"
+            required
+            minlength="6"
+            class="form-control"
+            name='password'
+            placeholder="Enter password"
+            #userPasswordField='ngModel'
+            [ngClass]="{'is-invalid': (userPasswordField.touched || userPasswordField.dirty) && !userPasswordField.valid }"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Confirm Password</label>
+          <span class="pull-right"
+            *ngIf='(userConfirmPasswordField.touched || userConfirmPasswordField.dirty) && userConfirmPasswordField.errors?.required'>
+            Please enter your confirm password
+          </span>
+          <span class="pull-right"
+            *ngIf='(userConfirmPasswordField.touched || userConfirmPasswordField.dirty) && userConfirmPasswordField.errors?.minlength'>
+            Confirm password must be longer than 6 characters.
+          </span>
+          <span class="pull-right"
+            *ngIf='userPasswordField.touched && userConfirmPasswordField.value != userPasswordField.value'>
+            Confirm password must be matched to password
+          </span>
+          <input type="password"
+            [(ngModel)]="user.confirmPassword"
+            required
+            minlength="6"
+            class="form-control"
+            name='confirmPassword'
+            placeholder="Enter password"
+            #userConfirmPasswordField='ngModel'
+            [ngClass]="{'is-invalid': (userConfirmPasswordField.touched || userConfirmPasswordField.dirty) && !userConfirmPasswordField.valid }"
+          />
+        </div>
+
+
+        <button
+          type="submit"
+          [disabled]='signupForm.invalid'
+          class="btn btn-primary">
+            Submit
+        </button>
+      </form>
+      <br> form: {{signupForm.touched}}
+      <br>Value: {{ signupForm.value | json }}
+    </div>
+
+  </div>
+</div>
