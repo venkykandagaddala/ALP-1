@@ -37,7 +37,7 @@ export class SignupComponent {
     this.signupService.register(this.user).subscribe((resp) => {
       if (resp !== undefined && resp.code === 200) {
         console.log(resp);
-        this.toastr.success('Successfully signedup.');
+        this.toastr.success(resp.message);
         this.router.navigate(['users']);
       } else {
         this.toastr.error(resp.message);

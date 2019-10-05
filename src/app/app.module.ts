@@ -8,6 +8,8 @@ import { AboutUsComponent } from './common/about-us.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
+import { AuthService } from './users/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 declare let toastr: Toastr;
 @NgModule({
@@ -19,10 +21,12 @@ declare let toastr: Toastr;
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    { provide: TOASTR_TOKEN, useValue: toastr }
+    { provide: TOASTR_TOKEN, useValue: toastr },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

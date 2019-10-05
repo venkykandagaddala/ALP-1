@@ -7,13 +7,11 @@ import { SignupComponent } from './signup.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { SignupService } from './signup.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,
     RouterModule.forChild(userRoutes)
   ],
   declarations: [
@@ -22,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent
   ],
   providers: [
-    SignupService,
+    SignupService
   ],
 })
 
