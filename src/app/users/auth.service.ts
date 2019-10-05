@@ -19,6 +19,7 @@ export class AuthService {
     return this.http.post<any>(url, {'user': this.mapUser}, options)
       .pipe(tap(data => {
         this.currentUser = data.user;
+        localStorage.setItem('session', JSON.stringify(data.user));
       }))
       .pipe(catchError(err => {
         return of(false);
@@ -27,5 +28,16 @@ export class AuthService {
 
   isAuthenticate() {
     return !!this.currentUser;
+  }
+
+  logout() {
+    this.currentUser = undefined;
+    localStorage.clear();
+  }
+
+  checkCurrentIdentity() {
+    if (localStorage['session'] !== undefined) {
+      return this.currentUser = JSON.parse(localStorage['session']);
+    }
   }
 }

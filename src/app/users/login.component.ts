@@ -26,7 +26,6 @@ export class LoginComponent {
   ) {}
 
   SubmitLoginForm(formValues) {
-    console.log(formValues);
     this.auth.login(formValues).subscribe((resp) => {
       if (resp && resp.code === 200) {
         this.toastr.success(resp.message);
