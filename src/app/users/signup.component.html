@@ -6,7 +6,7 @@
     <div class="card-body">
       <form
         #signupForm='ngForm'
-        (ngSubmit)='signupFormSubmit(signupForm)'
+        (ngSubmit)='signupFormSubmit(signupForm.value)'
         novalidate>
         <div class="form-group">
           <label for="firstName">First Name</label>
@@ -116,9 +116,6 @@
             Submit
         </button>
       </form>
-      <br> form: {{signupForm.touched}}
-      <br>Value: {{ signupForm.value | json }}
     </div>
-
   </div>
 </div>

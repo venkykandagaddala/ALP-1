@@ -7,7 +7,9 @@ import { NavBarComponent } from './common/nav-bar.component';
 import { AboutUsComponent } from './common/about-us.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
 
+declare let toastr: Toastr;
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,9 @@ import { appRoutes } from './routes';
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    { provide: TOASTR_TOKEN, useValue: toastr }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

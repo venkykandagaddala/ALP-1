@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { IUser } from './user.model';
+import { SignupService } from './signup.service';
+import { Router } from '@angular/router';
+import { TOASTR_TOKEN, Toastr } from '../common/toastr.service';
 
 @Component({
   selector: 'signup',
@@ -23,8 +26,22 @@ export class SignupComponent {
     confirmPassword: '',
   };
 
-  signupFormSubmit(form) {
+  constructor(
+    private signupService: SignupService,
+    private router: Router,
+    @Inject(TOASTR_TOKEN) private toastr: Toastr
+  ) {}
 
+  signupFormSubmit(formValues) {
+    this.user = formValues;
+    this.signupService.register(this.user).subscribe((resp) => {
+      if (resp !== undefined && resp.code === 200) {
+        console.log(resp);
+        this.toastr.success('Successfully signedup.');
+        this.router.navigate(['users']);
+      } else {
+        this.toastr.error(resp.message);
+      }
+    });
   }
-
 }
