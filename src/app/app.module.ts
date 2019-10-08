@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './common/nav-bar.component';
@@ -10,6 +10,7 @@ import { appRoutes } from './routes';
 import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
 import { AuthService } from './users/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './users/user.service';
 
 declare let toastr: Toastr;
 @NgModule({
@@ -21,12 +22,14 @@ declare let toastr: Toastr;
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
     { provide: TOASTR_TOKEN, useValue: toastr },
-    AuthService
+    AuthService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

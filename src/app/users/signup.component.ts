@@ -19,6 +19,7 @@ import { TOASTR_TOKEN, Toastr } from '../common/toastr.service';
 
 export class SignupComponent {
   user: IUser = {
+    id: undefined,
     email: '',
     firstName: '',
     lastName: '',
