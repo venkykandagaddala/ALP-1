@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './user.service';
-import { IUser } from './user.model';
+import { TOASTR_TOKEN, Toastr } from '../common/toastr.service';
 
 @Component({
   selector: 'edit-user',
@@ -14,10 +14,12 @@ export class EditUserComponent implements OnInit {
   firstName: FormControl;
   lastName: FormControl;
   userId: number;
+  user: any;
   constructor(
     private activeRouter: ActivatedRoute,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    @Inject(TOASTR_TOKEN) private toastr: Toastr
   ) {}
 
   ngOnInit() {
@@ -32,11 +34,16 @@ export class EditUserComponent implements OnInit {
         firstName: resp.data.firstName,
         lastName: resp.data.lastName
       });
+      this.user = resp.data;
     });
   }
 
-  updateUser(formValues) {
-    this.userService.updateUser(formValues.firstName);
+  updateUserDetails(formValues) {
+    console.log(formValues);
+    this.userService.updateUser(formValues.firstName, formValues.lastName, this.user.id).subscribe((resp) => {
+      this.user = resp.data;
+      this.toastr.success(resp.message);
+    });
   }
 
   cancle() {
