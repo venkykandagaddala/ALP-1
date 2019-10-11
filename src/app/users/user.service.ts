@@ -28,7 +28,7 @@ export class UserService {
       .pipe(catchError(this.handleError<any>('updateuser')));
   }
 
-  deleteUser(id) {
+  deleteUser(id): Observable<any> {
     const options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
     return this.http.delete<any>('http://localhost:3000/api/v1/users/' + id, options)
       .pipe(catchError(this.handleError<any>('updateuser')));
