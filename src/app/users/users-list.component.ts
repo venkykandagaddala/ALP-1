@@ -10,8 +10,26 @@ import { filter } from 'rxjs/operators';
 })
 export class UsersListComponent implements OnInit {
   users: IUser[];
-  filterby: string;
+  _listFilter: string;
   filteredUsers: IUser[];
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    if (this.listFilter) {
+      this.filteredUsers = this.performFilter(this.listFilter);
+    } else {
+      this.filteredUsers = this.users;
+    }
+  }
+
+  performFilter(filterBy: string) {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.users.filter((user) => user.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
   constructor(
     private userService: UserService,
     @Inject(TOASTR_TOKEN) private toastr: Toastr
@@ -34,15 +52,5 @@ export class UsersListComponent implements OnInit {
         this.toastr.error('something went wrong.');
       }
     });
-  }
-
-  search() {
-    const term = this.filterby.toLocaleLowerCase();
-    if (term) {
-      return this.filteredUsers.filter((user) =>
-        user.firstName.toLocaleLowerCase().indexOf(term) !== -1);
-    } else {
-      this.filteredUsers = this.users;
-    }
   }
 }

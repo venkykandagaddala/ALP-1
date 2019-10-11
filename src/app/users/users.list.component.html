@@ -4,10 +4,9 @@
 <div class="col-md-12" *ngIf='filteredUsers?.length > 0'>
     <div class="form-group pull-right">
     <input type='text'
-      [(ngModel)]="filterby"
+      [(ngModel)]="listFilter"
       class='form-control'
-      placeholder="Filter By"
-      onchange='search()' />
+      placeholder="Filter By" />
   </div>
   <div>
     <br>
