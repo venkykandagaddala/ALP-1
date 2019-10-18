@@ -12,10 +12,30 @@ export class UsersListComponent implements OnInit {
   users: IUser[];
   _listFilter: string;
   filteredUsers: IUser[];
+  _sortBy: string;
+
+  get sortBy(): string {
+    return this._sortBy;
+  }
+
+  set sortBy(value: string) {
+    this._sortBy = value;
+    console.log(this.sortBy);
+    if (this.sortBy === '0') {
+      this.filteredUsers = this.filteredUsers.sort((a, b) => b.firstName.localeCompare(a.firstName)).reverse();
+    } else if (this.sortBy === '1') {
+      this.filteredUsers = this.filteredUsers.sort((a, b) => b.lastName.localeCompare(a.lastName)).reverse();
+    } else {
+      this.filteredUsers = this.filteredUsers.sort((a, b) => b.email.localeCompare(a.email)).reverse();
+    }
+  }
 
   get listFilter(): string {
     return this._listFilter;
+
   }
+
+
 
   set listFilter(value: string) {
     this._listFilter = value;
