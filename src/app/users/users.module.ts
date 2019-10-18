@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { SignupService } from './signup.service';
 import { EditUserComponent } from './edit-user.component';
+import { ProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { EditUserComponent } from './edit-user.component';
     UsersListComponent,
     SignupComponent,
     LoginComponent,
-    EditUserComponent
+    EditUserComponent,
+    ProfileComponent
   ],
   providers: [
     SignupService
